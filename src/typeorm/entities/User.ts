@@ -7,6 +7,7 @@ export class User {
         type: 'bigint',
         name: 'user_id',
     })
+    @Exclude()
     id: number;
 
     @Column({
@@ -19,10 +20,11 @@ export class User {
     })
     lastname: string;
 
-    @Exclude()
     @Column({
         nullable: false,
     })
+    
+    @Exclude()
     password: string;
 
     @Column({
@@ -31,7 +33,6 @@ export class User {
     })
     phone_number: string;
 
-    @Exclude()
     @Column({
         default: false
     })
