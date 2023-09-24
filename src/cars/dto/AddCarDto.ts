@@ -6,7 +6,7 @@ export class AddCarDto {
     name: string;
     
     @IsNotEmpty()
-    stateNumber: string;
+    state_number: string;
 
     @IsNotEmpty()
     type: string;

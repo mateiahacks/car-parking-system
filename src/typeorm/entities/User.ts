@@ -1,5 +1,6 @@
 import { Exclude } from "class-transformer";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Car } from "./Car";
 
 @Entity()
 export class User {
@@ -40,7 +41,9 @@ export class User {
     @Column({
         default: 100,
     })
-    balance: number
-
+    balance: number;
+    
+    @OneToMany(() => Car, (car) => car.owner)
+    cars: Car[];
 
 }
