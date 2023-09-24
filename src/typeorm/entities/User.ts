@@ -43,7 +43,8 @@ export class User {
     })
     balance: number;
     
-    @OneToMany(() => Car, (car) => car.owner)
+    @JoinColumn()
+    @OneToMany(() => Car, (car) => car.owner, { cascade: true })
     cars: Car[];
 
 }

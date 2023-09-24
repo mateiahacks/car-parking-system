@@ -52,7 +52,7 @@ export class UsersController {
     @Post('change_password')
     @UsePipes(ValidationPipe)
     async changePassword(@Body() changePasswordDto: ChangePasswordDto, @Request() req) {
-        const { phone_number }: User = req.user;
+        const { phone_number, cars }: User = req.user;
 
         const user = await this.authService.changePassword(changePasswordDto, phone_number);
 

@@ -20,7 +20,7 @@ export class Car {
     @Column()
     type: string;
 
-    @ManyToOne(() => User, (user) => user.cars)
     @JoinColumn()
+    @ManyToOne(() => User, (user) => user.cars)
     owner: User;
 }
