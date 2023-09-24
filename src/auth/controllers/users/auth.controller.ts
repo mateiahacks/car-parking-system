@@ -1,12 +1,12 @@
 import { Body, Controller, Get, Post, Request, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
-import { RegisterUserDto } from 'src/dto/RegisterUserDto';
+import { RegisterUserDto } from 'src/auth/dto/RegisterUserDto';
 import { AuthService } from 'src/auth/services/auth-service/auth.service';
 import { JwtService } from '@nestjs/jwt';
 import { instanceToPlain } from 'class-transformer';
 import { AuthGuard } from 'src/auth/guards/auth.guard';
 import { User } from 'src/typeorm';
-import { LoginUserDto } from 'src/dto/LoginUserDto';
-import { ChangePasswordDto } from 'src/dto/ChangePasswordDto';
+import { LoginUserDto } from 'src/auth/dto/LoginUserDto';
+import { ChangePasswordDto } from 'src/auth/dto/ChangePasswordDto';
 
 @Controller('auth')
 export class UsersController {
@@ -44,8 +44,8 @@ export class UsersController {
     @UseGuards(AuthGuard)
     @Get('profile')
     getProfile(@Request() req) {
-        const { firstname, lastname, phone_number }: User = req.user;
-        return { firstname, lastname, phone_number };
+        const { firstname, lastname, phone_number, balance }: User = req.user;
+        return { firstname, lastname, phone_number, balance };
     }
 
     @UseGuards(AuthGuard)

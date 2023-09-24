@@ -7,3 +7,11 @@ export interface User {
     phone_number: string;
     balance: number;
 }
+
+export interface Car {
+    id: number;
+    name: string;
+    state_number: string;
+    type: string;
+    owner: number;
+}
