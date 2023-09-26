@@ -32,7 +32,6 @@ export class User {
     })
     phone_number: string;
 
-    @Exclude()
     @Column({
         default: false
     })

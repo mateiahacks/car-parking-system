@@ -1,6 +1,5 @@
-import { HttpCode, HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { instanceToPlain } from 'class-transformer';
 import { AddCarDto } from 'src/cars/dto/AddCarDto';
 import { UpdateCarDto } from 'src/cars/dto/UpdateCarDto';
 import { Car, User } from 'src/typeorm';

@@ -8,10 +8,11 @@ export class Car {
         type: 'bigint',
         name: 'car_id',
     })
-    @Exclude()
     id: number;
 
-    @Column()
+    @Column({
+        nullable: false,
+    })
     name: string;
 
     @Column()
