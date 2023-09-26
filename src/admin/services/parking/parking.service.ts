@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { createParkingDto } from 'src/admin/dto/CreateParkingDto';
+import { UpdateParkingDto } from 'src/admin/dto/UpdateParkingDto';
 import { Parking } from 'src/typeorm';
 import { Repository } from 'typeorm';
 
@@ -25,5 +26,31 @@ export class ParkingService {
         return await this.parkingRepository.find({
             relations: { reservations: true }
         });
+    }
+
+    async deleteParking(id: number) {
+        const parking = await this.parkingRepository.findOne(
+            { where: {id} }
+        );
+
+        if (!parking)
+            throw new HttpException("Parking with such id doesn't exist!", HttpStatus.BAD_REQUEST);
+
+        await this.parkingRepository.delete({ id });
+
+        return { message: "Successfully deleted" }
+    }
+
+    async updateParking(id: number, updateParkingDto: UpdateParkingDto) {
+        const parking = await this.parkingRepository.findOne({
+            where: { id }
+        });
+
+        if (!parking)
+            throw new HttpException("Parking with such id doesn't exist!", HttpStatus.BAD_REQUEST);
+
+        await this.parkingRepository.update({ id }, { ...updateParkingDto });
+
+        return { message: "Succesfully updated" };
     }
 }

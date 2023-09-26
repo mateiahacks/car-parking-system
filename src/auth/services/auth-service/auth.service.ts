@@ -35,7 +35,7 @@ export class AuthService {
         const user = await this.userRepository.findOneBy({ phone_number });
 
         if (!await bcrypt.compare(password, user.password)) {
-            throw new UnauthorizedException();
+            throw new UnauthorizedException('Invalid credentials!');
         }
         return user;
     }
