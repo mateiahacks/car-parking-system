@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { CarsModule } from './cars/cars.module';
 import { AdminModule } from './admin/admin.module';
+import { ReservationsModule } from './reservations/reservations.module';
 import entities from './typeorm';
 
 @Module({
@@ -21,6 +22,7 @@ import entities from './typeorm';
     synchronize: true,
   }),
     CarsModule,
-    AdminModule],
+    AdminModule,
+    ReservationsModule],
 })
 export class AppModule {}

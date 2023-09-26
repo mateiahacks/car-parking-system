@@ -1,6 +1,7 @@
 import { Exclude } from "class-transformer";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "./User";
+import { Reservation } from "./Reservation";
 
 @Entity()
 export class Car {
@@ -24,4 +25,8 @@ export class Car {
     @JoinColumn()
     @ManyToOne(() => User, (user) => user.cars)
     owner: User;
+
+    @OneToOne(() => Reservation, (reservation) => reservation.car)
+    reservation: Reservation;
+
 }

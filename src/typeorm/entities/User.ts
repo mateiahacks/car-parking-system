@@ -1,6 +1,7 @@
 import { Exclude } from "class-transformer";
 import { Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Car } from "./Car";
+import { Reservation } from "./Reservation";
 
 @Entity()
 export class User {
@@ -45,5 +46,8 @@ export class User {
     @JoinColumn()
     @OneToMany(() => Car, (car) => car.owner, { cascade: true })
     cars: Car[];
+
+    @OneToMany(() => Reservation, (reservation) => reservation.user)
+    reservations: Reservation[];
 
 }
