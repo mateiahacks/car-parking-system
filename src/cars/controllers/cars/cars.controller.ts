@@ -6,12 +6,12 @@ import { CarsService } from 'src/cars/services/cars/cars.service';
 import { User } from 'src/types';
 
 @Controller('cars')
+@UseGuards(AuthGuard)
 export class CarsController {
     constructor(
         private carService: CarsService,
     ) {}
     
-    @UseGuards(AuthGuard)
     @Post()
     @UsePipes(ValidationPipe)
     addMyCar(@Request() req, @Body() addCarDto: AddCarDto) {
@@ -20,7 +20,6 @@ export class CarsController {
     } 
 
 
-    @UseGuards(AuthGuard)
     @Get()
     async getMyCars(@Request() req) {
         const { id }: User = req.user;
@@ -28,13 +27,11 @@ export class CarsController {
         return this.carService.getMyCars(id);
     }
 
-    @UseGuards(AuthGuard)
     @Delete(':id')
     async deleteCar(@Param('id', ParseIntPipe) id: number, @Request() req) {
         return await this.carService.deleteCar(id, req.user.id);
     }
 
-    @UseGuards(AuthGuard)
     @UsePipes(ValidationPipe)
     @Put(':id')
     async updateCar

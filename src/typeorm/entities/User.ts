@@ -38,6 +38,7 @@ export class User {
     })
     is_admin: boolean;
 
+    @JoinColumn()
     @Column({
         default: 100,
     })
@@ -47,7 +48,8 @@ export class User {
     @OneToMany(() => Car, (car) => car.owner, { cascade: true })
     cars: Car[];
 
-    @OneToMany(() => Reservation, (reservation) => reservation.user)
+    @JoinColumn()
+    @OneToMany(() => Reservation, (reservation) => reservation.user, { cascade: true })
     reservations: Reservation[];
 
 }

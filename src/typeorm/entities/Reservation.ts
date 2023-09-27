@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Parking } from "./Parking";
 import { User } from "./User";
 import { Car } from "./Car";
@@ -22,12 +22,15 @@ export class Reservation {
     })
     expiration_date: string;
 
+    @JoinColumn()
     @ManyToOne(() => User, (user) => user.reservations)
     user: User
 
-    @OneToOne(() => Car, (car) => car.reservation)
+    @JoinColumn()
+    @ManyToOne(() => Car, (car) => car.reservations)
     car: Car;
 
+    @JoinColumn()
     @ManyToOne(() => Parking, (parking) => parking.reservations)
     parking: Parking;
 

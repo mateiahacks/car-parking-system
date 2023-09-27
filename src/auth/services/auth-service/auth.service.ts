@@ -51,4 +51,16 @@ export class AuthService {
         user.password = await hashPassword(newPassword);
         return this.userRepository.save(user);
     }
+
+    async getProfile(id: number) {
+        const user = await this.userRepository.findOne({
+            where: { id },
+            relations: { cars: true, reservations: true }
+        });
+
+        if (!user)
+            throw new HttpException('User not found', HttpStatus.BAD_REQUEST);
+
+        return user;
+    }
 }

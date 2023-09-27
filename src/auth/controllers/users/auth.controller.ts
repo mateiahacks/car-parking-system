@@ -44,8 +44,7 @@ export class UsersController {
     @UseGuards(AuthGuard)
     @Get('profile')
     getProfile(@Request() req) {
-        const { firstname, lastname, phone_number, balance }: User = req.user;
-        return { firstname, lastname, phone_number, balance };
+        return this.authService.getProfile(req.user.id);
     }
 
     @UseGuards(AuthGuard)
@@ -57,6 +56,5 @@ export class UsersController {
         const user = await this.authService.changePassword(changePasswordDto, phone_number);
 
         return instanceToPlain(user);
-
     }
 }
