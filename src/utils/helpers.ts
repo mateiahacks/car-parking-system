@@ -7,10 +7,13 @@ export async function hashPassword(rawPassword: string) {
 }
 
 export function isCurrentlyReserved(reservations: Reservation[]) {
-    const last = reservations[reservations.length - 1];
+    for (const reservation of reservations) {
+        const expiration_date = new Date(reservation.expiration_date);
+        const now_date = new Date()
 
-    if (!last) 
-        return false;
+        if (now_date < expiration_date)
+            return true;
+    }       
 
-    return new Date(last.expiration_date) > new Date();
+    return false;
 }
