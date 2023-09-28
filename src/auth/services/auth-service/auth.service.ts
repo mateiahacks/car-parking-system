@@ -31,6 +31,24 @@ export class AuthService {
         
     }
 
+    async createAdmin() {
+        const admin = await this.userRepository.findOneBy({is_admin: true});
+
+        if(admin)
+            return;
+
+        const mockAdmin = {
+            firstname: "admin",
+            lastname: "admin",
+            phone_number: process.env.ADMIN_LOGIN,
+            password: await hashPassword(process.env.ADMIN_PASSWORD),
+            is_admin: true,
+        }
+        const newAdmin = this.userRepository.create(mockAdmin);
+        return await this.userRepository.save(newAdmin);
+
+    }
+
     async login(loginUserDto: LoginUserDto) {
         const { phone_number, password } = loginUserDto;
         const user = await this.userRepository.findOneBy({ phone_number });

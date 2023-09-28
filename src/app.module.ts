@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common'
+import { Module, OnModuleInit } from '@nestjs/common'
 import { UsersModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
@@ -6,11 +6,13 @@ import { CarsModule } from './cars/cars.module';
 import { AdminModule } from './admin/admin.module';
 import { ReservationsModule } from './reservations/reservations.module';
 import entities from './typeorm';
+import { AuthService } from './auth/services/auth-service/auth.service';
 
 @Module({
   imports: [
     UsersModule, 
     ConfigModule.forRoot(),
+    TypeOrmModule.forFeature(entities),
     TypeOrmModule.forRoot({
     type: 'mysql',
     host: process.env.DATABASE_HOST,
@@ -23,6 +25,16 @@ import entities from './typeorm';
   }),
     CarsModule,
     AdminModule,
-    ReservationsModule],
+    ReservationsModule,
+  ],
+  providers: [AuthService],
 })
-export class AppModule {}
+export class AppModule implements OnModuleInit{
+  constructor(
+    private authService: AuthService,
+  ) {}
+
+  async onModuleInit() {
+    console.log(await this.authService.createAdmin());
+  }
+}
