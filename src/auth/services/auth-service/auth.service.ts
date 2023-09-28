@@ -8,6 +8,7 @@ import { JwtService } from '@nestjs/jwt';
 import { LoginUserDto } from 'src/auth/dto/LoginUserDto';
 import * as bcrypt from 'bcrypt';
 import { ChangePasswordDto } from 'src/auth/dto/ChangePasswordDto';
+import { instanceToPlain } from 'class-transformer';
 
 @Injectable()
 export class AuthService {
@@ -61,6 +62,6 @@ export class AuthService {
         if (!user)
             throw new HttpException('User not found', HttpStatus.BAD_REQUEST);
 
-        return user;
+        return instanceToPlain(user);
     }
 }
