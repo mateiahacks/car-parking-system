@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  db:
+    image: mysql:8
+    environment:
+      - MYSQL_DATABASE=car_parking_system
+      - MYSQL_ROOT_PASSWORD=password
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+
+  back-end:
+    image: nodejs-back-end
+    build: .
+    env_file: ./.env
+    ports:
+      - 3001:3001
+    command: yarn start
+    depends_on:
+      - db
+
+
+volumes:
+  mysql-data:
