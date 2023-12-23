@@ -16,10 +16,10 @@ Backend Application for Managing Parking spaces built with Nest.js and MySql
 
 ### How to run!
 
-1. clone project to your local machine
+1. clone project to your local machine and run npm install
 2. create .env file 
 3. copy everithing from .env.example in .env
-4. fill up with apporpriate values where it's empty.
+4. fill up dields with apporpriate values where it's empty.
 
 To start using application you should use following docker commands:
 
