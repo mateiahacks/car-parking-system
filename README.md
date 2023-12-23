@@ -6,6 +6,7 @@ Backend Application for Managing Parking spaces built with Nest.js and MySql
 * Constructed appropriate Database Relational Models with TypeORM.
 * Implemented JWT Authorization for secure access control.
 * Utilized Middlewares and Guards for request handling.
+* Tested with postman.
 * Dockerized application for deployment.
 
 ### Skills
